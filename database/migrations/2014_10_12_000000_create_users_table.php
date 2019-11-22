@@ -21,6 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('totalBalance')->default(21);
+            $table->integer('annualBalance')->default(15);
+            $table->integer('casualBalance')->default(6);
+
         });
     }
 
