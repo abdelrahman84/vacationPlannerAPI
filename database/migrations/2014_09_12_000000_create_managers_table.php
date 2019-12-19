@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateManagersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,29 +13,19 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('managers', function (Blueprint $table) {
+            
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('totalBalance')->default(21);
-            $table->integer('annualBalance')->default(15);
-            $table->integer('casualBalance')->default(6);
-            $table->bigInteger('manager_id')->unsigned()->index();
-            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
-            $table->timestamps(); 
-           
-            
+            $table->timestamps();   
         });
-
-    
-
-       
     }
 
-    
+   
 
     /**
      * Reverse the migrations.
@@ -44,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('managers');
     }
 }
