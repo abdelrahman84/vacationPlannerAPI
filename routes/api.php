@@ -9,10 +9,22 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+
+Route::group([
+    'prefix' => 'manager',
+    'middleware' => 'api'
+], function ($router) {
+    Route::post('signupmanager', 'ManagerController@signupManager');
+    Route::post('adminlogin', 'ManagerController@adminLogin');   
+   
+});
+
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login');   
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
