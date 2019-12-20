@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
+use App\Manager;
 class AuthController extends Controller
 {
     /**
@@ -29,8 +30,11 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
     public function signup(SignupRequest $request) {
+        $manager= Manager::find($request->manager_id);
         $user = User::create($request->all());
+        $manager->users()->save($user);
         return $this->login($request);
+        //return response()->json(['manager'=>$manager]);
     }
     /**
      * Get the authenticated User.
