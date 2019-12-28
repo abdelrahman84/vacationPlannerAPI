@@ -31,4 +31,13 @@ class VacationController extends Controller
         $manager->vacations()->save($vacation);
         return response()->json(['message' => 'message submitted successfully']);
     }
+
+    public function getUserPendingVacations() {
+        $user = Auth::user();
+        $vacations = $user->vacations()->where('status','pending')->get();
+        return response([
+            'status' => 'success',
+            'data' => $vacations
+        ],200);
+    }
 }

@@ -41,6 +41,7 @@ Route::group([
     Route::post('resetpassword', 'ResetPasswordController@sendEmail');
     Route::post('changepassword', 'ChangePasswordController@changePassword');
     Route::post('submitnewvacation', 'VacationController@createVacation');
+    Route::get('getuserpendingvacations', 'VacationController@getUserPendingVacations');
     Route::post('me', 'AuthController@me');
    
 });
