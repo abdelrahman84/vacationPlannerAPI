@@ -58,4 +58,9 @@ class Manager extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\User');
     }
+
+    public function vacations()
+    {
+        return $this->hasMany('App\Vacation');
+    }
 }

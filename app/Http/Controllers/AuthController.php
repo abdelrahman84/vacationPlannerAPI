@@ -5,17 +5,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
 use App\Manager;
+use JWTAuth;
+use JWTAuthException;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Config;
+
+
+
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
-    }
     /**
      * Get a JWT via given credentials.
      *
@@ -24,7 +23,7 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Email Or Password Doesn\'t Exist'], 401);
         }
         return $this->respondWithToken($token);

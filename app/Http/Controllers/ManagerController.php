@@ -24,9 +24,7 @@ class ManagerController extends Controller
             'driver' => 'eloquent',
             'model' => Manager::class,
         ]]);
-
- 
-        
+         
 }
     
 

@@ -66,4 +66,9 @@ class User extends Authenticatable implements JWTSubject
     public function manager() {
         return $this->belongsTo('App\Manager');
     }
+
+    public function vacations()
+    {
+        return $this->hasMany('App\Vacation');
+    }
 }

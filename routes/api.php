@@ -21,15 +21,26 @@ Route::group([
    
 });
 
+    
+
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
+    
     Route::post('login', 'AuthController@login');   
     Route::post('signup', 'AuthController@signup');
+   
+});
+
+Route::group([
+    'middleware' => 'jwt.auth', 'jwt.refresh'
+], function ($router) {
+    
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('resetpassword', 'ResetPasswordController@sendEmail');
     Route::post('changepassword', 'ChangePasswordController@changePassword');
+    Route::post('submitnewvacation', 'VacationController@createVacation');
     Route::post('me', 'AuthController@me');
    
 });
