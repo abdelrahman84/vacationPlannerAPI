@@ -30,8 +30,16 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
     public function signup(SignupRequest $request) {
-        $manager= Manager::find($request->manager_id);
-        $user = User::create($request->all());
+        $manager= Manager::where('email' , $request->manager_id)->first();
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->totalBalance = $request->totalBalance;
+        $user->annualBalance = $request->annualBalance;
+        $user->casualBalance = $request->casualBalance;
+        $user->manager_id = $manager->id;
+        $user->save();
         $manager->users()->save($user);
         return $this->login($request);
         //return response()->json(['manager'=>$manager]);
