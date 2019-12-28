@@ -24,13 +24,16 @@ class ManagerController extends Controller
             'driver' => 'eloquent',
             'model' => Manager::class,
         ]]);
+
+ 
+        
 }
     
 
     public function adminLogin() 
     {
     
-        $credentials = request(['email', 'password']);
+        $credentials = request(['email', 'password',]);
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json([
@@ -47,8 +50,8 @@ class ManagerController extends Controller
         return response()->json([
             'response' => 'success',
             'result' => [
-                'token' => $token,
-                'manager' => auth()->user()
+                'access_token' => $token,
+                'user' => auth()->user()
             ],
         ]);
         
